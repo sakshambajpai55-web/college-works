@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct poly{
+    int coeff, power;
+    struct poly* next;
+};
+
+struct poly* create(){
+    struct poly *head=NULL,*temp=NULL,*newnode;
+    int n;
+    printf("Enter number of terms: ");
+    scanf("%d",&n);
+
+    for(int i=0;i<n;i++){
+        newnode=malloc(sizeof(struct poly));
+        printf("Coeff & Power: ");
+        scanf("%d%d",&newnode->coeff,&newnode->power);
+        newnode->next=NULL;
+
+        if(head==NULL) head=temp=newnode;
+        else{
+            temp->next=newnode;
+            temp=newnode;
+        }
+    }
+    return head;
+}
+
+void display(struct poly* head){
+    while(head){
+        printf("%dx^%d ",head->coeff,head->power);
+        head=head->next;
+    }
+    printf("\n");
+}
+
+int main(){
+    struct poly *p1,*p2;
+    printf("First Polynomial\n");
+    p1=create();
+    printf("Second Polynomial\n");
+    p2=create();
+
+    printf("Polynomial 1: "); display(p1);
+    printf("Polynomial 2: "); display(p2);
+}
