@@ -1,0 +1,31 @@
+import java.util.Scanner;
+
+public class SpiralMatrix {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        int[][] a = new int[n][n];
+        int val = 1;
+        int top = 0, bottom = n-1, left = 0, right = n-1;
+
+        while (top <= bottom && left <= right) {
+            for (int i = left; i <= right; i++) a[top][i] = val++;
+            top++;
+
+            for (int i = top; i <= bottom; i++) a[i][right] = val++;
+            right--;
+
+            for (int i = right; i >= left; i--) a[bottom][i] = val++;
+            bottom--;
+
+            for (int i = bottom; i >= top; i--) a[i][left] = val++;
+            left++;
+        }
+
+        for (int[] row : a) {
+            for (int x : row) System.out.print(x + " ");
+            System.out.println();
+        }
+    }
+}
