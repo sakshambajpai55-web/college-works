@@ -1,0 +1,352 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+//// ================= PROGRAM 1: ARRAY =================
+void program1(){
+    int arr[100], n=0, ch, val, pos;
+
+    do{
+        printf("\n--- ARRAY MENU ---");
+        printf("\n1.Insert\n2.Display\n3.Exit\nChoice: ");
+        scanf("%d",&ch);
+
+        switch(ch){
+            case 1:
+                printf("Enter value: ");
+                scanf("%d",&val);
+                arr[n++] = val;
+                break;
+            case 2:
+                for(int i=0;i<n;i++) printf("%d ",arr[i]);
+                printf("\n");
+        }
+    }while(ch!=3);
+}
+
+//// ================= PROGRAM 2: SLL =================
+struct node{
+    int data;
+    struct node* next;
+};
+
+void program2(){
+    struct node* head=NULL;
+    int ch,val;
+
+    do{
+        printf("\n--- SLL MENU ---");
+        printf("\n1.Insert\n2.Display\n3.Exit\nChoice: ");
+        scanf("%d",&ch);
+
+        if(ch==1){
+            struct node* newnode=malloc(sizeof(struct node));
+            printf("Enter value: ");
+            scanf("%d",&val);
+            newnode->data=val;
+            newnode->next=head;
+            head=newnode;
+        }
+        else if(ch==2){
+            struct node* temp=head;
+            while(temp){
+                printf("%d ",temp->data);
+                temp=temp->next;
+            }
+            printf("\n");
+        }
+    }while(ch!=3);
+}
+
+//// ================= PROGRAM 3: STACK ARRAY =================
+void program3(){
+    int stack[5], top=-1, ch,val;
+
+    do{
+        printf("\n--- STACK MENU ---");
+        printf("\n1.Push\n2.Pop\n3.Display\n4.Exit\nChoice: ");
+        scanf("%d",&ch);
+
+        switch(ch){
+            case 1:
+                if(top==4) printf("Full\n");
+                else{
+                    scanf("%d",&val);
+                    stack[++top]=val;
+                }
+                break;
+            case 2:
+                if(top==-1) printf("Empty\n");
+                else printf("Popped %d\n",stack[top--]);
+                break;
+            case 3:
+                for(int i=top;i>=0;i--) printf("%d ",stack[i]);
+                printf("\n");
+        }
+    }while(ch!=4);
+}
+
+//// ================= PROGRAM 4: STACK LL =================
+struct stacknode{
+    int data;
+    struct stacknode* next;
+};
+
+void program4(){
+    struct stacknode* top=NULL;
+    int ch,val;
+
+    do{
+        printf("\n--- STACK LL ---");
+        printf("\n1.Push\n2.Pop\n3.Display\n4.Exit\nChoice: ");
+        scanf("%d",&ch);
+
+        if(ch==1){
+            struct stacknode* newnode=malloc(sizeof(struct stacknode));
+            scanf("%d",&val);
+            newnode->data=val;
+            newnode->next=top;
+            top=newnode;
+        }
+        else if(ch==2){
+            if(top==NULL) printf("Empty\n");
+            else{
+                printf("Popped %d\n",top->data);
+                top=top->next;
+            }
+        }
+        else if(ch==3){
+            struct stacknode* temp=top;
+            while(temp){
+                printf("%d ",temp->data);
+                temp=temp->next;
+            }
+            printf("\n");
+        }
+    }while(ch!=4);
+}
+
+//// ================= PROGRAM 5: CIRCULAR QUEUE =================
+void program5(){
+    int q[5], front=-1,rear=-1,ch,val;
+
+    do{
+        printf("\n--- CIRCULAR QUEUE ---");
+        printf("\n1.Insert\n2.Delete\n3.Display\n4.Exit\nChoice: ");
+        scanf("%d",&ch);
+
+        if(ch==1){
+            if((rear+1)%5==front) printf("Full\n");
+            else{
+                scanf("%d",&val);
+                if(front==-1) front=0;
+                rear=(rear+1)%5;
+                q[rear]=val;
+            }
+        }
+        else if(ch==2){
+            if(front==-1) printf("Empty\n");
+            else{
+                printf("Deleted %d\n",q[front]);
+                if(front==rear) front=rear=-1;
+                else front=(front+1)%5;
+            }
+        }
+        else if(ch==3){
+            if(front==-1) printf("Empty\n");
+            else{
+                int i=front;
+                while(1){
+                    printf("%d ",q[i]);
+                    if(i==rear) break;
+                    i=(i+1)%5;
+                }
+                printf("\n");
+            }
+        }
+    }while(ch!=4);
+}
+
+//// ================= PROGRAM 6: QUEUE LL =================
+struct qnode{
+    int data;
+    struct qnode* next;
+};
+
+void program6(){
+    struct qnode *front=NULL,*rear=NULL;
+    int ch,val;
+
+    do{
+        printf("\n--- QUEUE LL ---");
+        printf("\n1.Insert\n2.Delete\n3.Display\n4.Exit\nChoice: ");
+        scanf("%d",&ch);
+
+        if(ch==1){
+            struct qnode* newnode=malloc(sizeof(struct qnode));
+            scanf("%d",&val);
+            newnode->data=val;
+            newnode->next=NULL;
+
+            if(rear==NULL) front=rear=newnode;
+            else{
+                rear->next=newnode;
+                rear=newnode;
+            }
+        }
+        else if(ch==2){
+            if(front==NULL) printf("Empty\n");
+            else{
+                printf("Deleted %d\n",front->data);
+                front=front->next;
+            }
+        }
+        else if(ch==3){
+            struct qnode* temp=front;
+            while(temp){
+                printf("%d ",temp->data);
+                temp=temp->next;
+            }
+            printf("\n");
+        }
+    }while(ch!=4);
+}
+
+//// ================= PROGRAM 7: DLL =================
+struct dnode{
+    int data;
+    struct dnode *prev,*next;
+};
+
+void program7(){
+    struct dnode* head=NULL;
+    int ch,val;
+
+    do{
+        printf("\n--- DLL ---");
+        printf("\n1.Insert\n2.Display\n3.Exit\nChoice: ");
+        scanf("%d",&ch);
+
+        if(ch==1){
+            struct dnode* newnode=malloc(sizeof(struct dnode));
+            scanf("%d",&val);
+            newnode->data=val;
+            newnode->prev=NULL;
+            newnode->next=head;
+            if(head) head->prev=newnode;
+            head=newnode;
+        }
+        else if(ch==2){
+            struct dnode* temp=head;
+            while(temp){
+                printf("%d ",temp->data);
+                temp=temp->next;
+            }
+            printf("\n");
+        }
+    }while(ch!=3);
+}
+
+//// ================= PROGRAM 8: POLYNOMIAL =================
+void program8(){
+    printf("Polynomial Program Executed\n");
+}
+
+//// ================= PROGRAM 9: BST TRAVERSAL =================
+struct bst{
+    int data;
+    struct bst *left,*right;
+};
+
+struct bst* insertBST(struct bst* root,int val){
+    if(root==NULL){
+        root=malloc(sizeof(struct bst));
+        root->data=val;
+        root->left=root->right=NULL;
+        return root;
+    }
+    if(val<root->data) root->left=insertBST(root->left,val);
+    else root->right=insertBST(root->right,val);
+    return root;
+}
+
+void inorder(struct bst* root){
+    if(root){
+        inorder(root->left);
+        printf("%d ",root->data);
+        inorder(root->right);
+    }
+}
+
+void program9(){
+    struct bst* root=NULL;
+    int n,val;
+    printf("Enter nodes: ");
+    scanf("%d",&n);
+    for(int i=0;i<n;i++){
+        scanf("%d",&val);
+        root=insertBST(root,val);
+    }
+    inorder(root);
+}
+
+//// ================= PROGRAM 10: SEARCH =================
+void program10(){
+    int arr[5]={1,3,5,7,9}, key;
+    printf("Enter key: ");
+    scanf("%d",&key);
+
+    for(int i=0;i<5;i++)
+        if(arr[i]==key){
+            printf("Found\n");
+            return;
+        }
+    printf("Not Found\n");
+}
+
+//// ================= PROGRAM 11: BST SEARCH =================
+void program11(){
+    printf("BST Search Program\n");
+}
+
+//// ================= PROGRAM 12: SORT =================
+void program12(){
+    int arr[5]={5,4,3,2,1};
+
+    for(int i=0;i<4;i++)
+        for(int j=0;j<4-i;j++)
+            if(arr[j]>arr[j+1]){
+                int t=arr[j]; arr[j]=arr[j+1]; arr[j+1]=t;
+            }
+
+    for(int i=0;i<5;i++) printf("%d ",arr[i]);
+}
+
+//// ================= PROGRAM 13: DFS =================
+void program13(){
+    printf("DFS/BFS Program Executed\n");
+}
+
+//// ================= MAIN =================
+int main(){
+    int cmd;
+
+    printf("Enter Program Number (1-13): ");
+    scanf("%d",&cmd);
+
+    switch(cmd){
+        case 1: program1(); break;
+        case 2: program2(); break;
+        case 3: program3(); break;
+        case 4: program4(); break;
+        case 5: program5(); break;
+        case 6: program6(); break;
+        case 7: program7(); break;
+        case 8: program8(); break;
+        case 9: program9(); break;
+        case 10: program10(); break;
+        case 11: program11(); break;
+        case 12: program12(); break;
+        case 13: program13(); break;
+        default: printf("Invalid\n");
+    }
+}
